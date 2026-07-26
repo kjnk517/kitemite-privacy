@@ -194,6 +194,15 @@
         showMessage('パスワードは8文字以上で入力してください。', 'error');
         return;
       }
+      const hasUpper = /[A-Z]/.test(password);
+      const hasLower = /[a-z]/.test(password);
+      const hasNumber = /[0-9]/.test(password);
+      const hasSymbol = /[^A-Za-z0-9]/.test(password);
+      const typeCount = [hasUpper, hasLower, hasNumber, hasSymbol].filter(Boolean).length;
+      if (typeCount < 3) {
+        showMessage('大文字・小文字・数字・記号のうち3種類以上を含めてください。', 'error');
+        return;
+      }
       if (password !== confirm) {
         showMessage('パスワードが一致していません。', 'error');
         return;
